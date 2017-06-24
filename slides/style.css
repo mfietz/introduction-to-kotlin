@@ -1,4 +1,7 @@
-body { font-family: 'Droid Serif'; }
+body {
+  font-family: 'Droid Serif';
+}
+
 h1, h2, h3 {
   font-family: 'Yanone Kaffeesatz';
   font-weight: normal;
@@ -8,12 +11,15 @@ h1, h2, h3 {
 h1 {
   font-size: 72;
 }
+
 .white-text {
   color: white;
 }
+
 .remark-slide-number {
   opacity: 1; /* default: 0.5 */
 }
+
 div.footer {
   position: absolute;
   bottom: 0;
@@ -28,8 +34,8 @@ div.footer.bottombox {
 div.bottombox h1, h2, h3 {
   color: white;
 }
+
 .divider {
-  background-color: #26546D;
   vertical-align: middle;
 }
 .divider .remark-slide-number {
@@ -39,16 +45,7 @@ div.bottombox h1, h2, h3 {
   text-align: center;
   color: white;
 }
-.sub-divider {
-  background-color: #70AD47;
-  vertical-align: middle;
-}
-.sub-divider .remark-slide-number {
-   color: white;
-}
-.sub-divider h1, h2, h3 {
-  text-align: center;
-  color: white;
-}
 
-.remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+.remark-code, .remark-inline-code {
+  font-family: 'Ubuntu Mono';
+}
