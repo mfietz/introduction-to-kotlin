@@ -1,0 +1,54 @@
+body { font-family: 'Droid Serif'; }
+h1, h2, h3 {
+  font-family: 'Yanone Kaffeesatz';
+  font-weight: normal;
+  text-align: center;
+  color:  #2C4B60;
+}
+h1 {
+  font-size: 72;
+}
+.white-text {
+  color: white;
+}
+.remark-slide-number {
+  opacity: 1; /* default: 0.5 */
+}
+div.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+div.footer.bottombox {
+  opacity: 0.8;
+  text-align: center;
+  filter: alpha(opacity=80); /* For IE8 and earlier */
+}
+div.bottombox h1, h2, h3 {
+  color: white;
+}
+.divider {
+  background-color: #26546D;
+  vertical-align: middle;
+}
+.divider .remark-slide-number {
+   color: white;
+}
+.divider h1, h2, h3 {
+  text-align: center;
+  color: white;
+}
+.sub-divider {
+  background-color: #70AD47;
+  vertical-align: middle;
+}
+.sub-divider .remark-slide-number {
+   color: white;
+}
+.sub-divider h1, h2, h3 {
+  text-align: center;
+  color: white;
+}
+
+.remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
