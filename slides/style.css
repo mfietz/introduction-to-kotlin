@@ -8,9 +8,6 @@ h1, h2, h3 {
   text-align: center;
   color:  #2C4B60;
 }
-h1 {
-  font-size: 72;
-}
 
 .white-text {
   color: white;
@@ -33,6 +30,12 @@ div.footer.bottombox {
 }
 div.bottombox h1, h2, h3 {
   color: white;
+}
+
+div.footnote {
+  position: absolute;
+  bottom: 3.5em;
+  left: 4.0em;
 }
 
 .divider {

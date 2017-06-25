@@ -46,11 +46,95 @@ layout: true
 
 ---
 
-# Agenda
+# First Taste¹
 
-1. Introduction
-2. Deep-dive
-3. ...
+```
+data class Person(
+        val name: String,
+        val age: Int? = null
+)
+
+fun main(args: Array<String>) {
+    val people = listOf(Person("Alice"), Person("Bob", age = 42))
+    println("The oldest person is ${people.oldest()}}")
+}
+
+private fun List<Person>.oldest() = this.maxBy { it.age ?: 0 }
+```
+
+prints
+```diff
+The oldest person is Person(name=Bob, age=42)}
+```
+<div class="footnote">
+<hr>
+<span class="footnote">¹ Adapted from <i>Kotlin in Action</i></span>
+</div>
+
+---
+
+count: false
+
+# First Taste¹
+
+```
+data class Person(
+        val name: String,
+        val age: Int? = null
+)
+
+fun main(args: Array<String>) {
+*   val people = listOf(Person("Alice"), Person("Bob", age = 42))
+    println("The oldest person is ${people.oldest()}}")
+}
+
+private fun List<Person>.oldest() = this.maxBy { it.age ?: 0 }
+```
+
+prints
+```diff
+The oldest person is Person(name=Bob, age=42)}
+```
+<div class="footnote">
+<hr>
+<span class="footnote">¹ Adapted from <i>Kotlin in Action</i></span>
+</div>
+
+---
+
+
+count: false
+
+# First Taste¹
+
+```
+data class Person(
+        val name: String,
+        val age: Int? = null
+)
+
+fun main(args: Array<String>) {
+    val people = listOf(Person("Alice"), Person("Bob", age = 42))
+*   println("The oldest person is ${people.oldest()}}")
+}
+
+private fun List<Person>.oldest() = this.maxBy { it.age ?: 0 }
+```
+
+prints
+```diff
+The oldest person is Person(name=Bob, age=42)}
+```
+<div class="footnote">
+<hr>
+<span class="footnote">¹ Adapted from <i>Kotlin in Action</i></span>
+</div>
+
+---
+---
+
+template: divider
+# Thanks
 
 ---
 
@@ -59,30 +143,11 @@ template: divider
 
 ---
 
-# Introduction
-
-Some really, really interesting points
-
----
-
 template: sub-divider
-
-# Lala
-
----
-
-# Code
-
-```kotlin
-fun main(args: Array<String>) {
-  println("Hallo")
-}
-```
+# Sub-Divier
 
 ---
 
-template: divider
-# Thanks
 
 <!-- CONTEND END -->
 </textarea>
@@ -92,6 +157,10 @@ template: divider
   var slideshow = remark.create({
     highlightLanguage: 'kotlin',
     highlightStyle: 'idea',
+    highlightLines: true,
+    navigation: {
+      scroll: false  // disable nagivation using scroll
+    }
   });
 </script>
 </body>
