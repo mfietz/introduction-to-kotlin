@@ -142,10 +142,23 @@ May 2017: Google announces First-class support for Android
 
 June 2017: Kotlin reaches TIOBE top 50
 
+
 ---
 
 template: divider
 # Key Features
+
+---
+
+# Kotlin is ...
+
+- based on Java 6
+
+- Open Source: published under the Apache License, Version 2.0
+
+- actively developed on GitHub
+
+- loves contributions
 
 ---
 
@@ -162,6 +175,89 @@ template: divider
 - Defaulted parameters
 
 ---
+
+# Key Features (cont'd)
+
+- Immutability
+
+- Higher-order functions / lambda expressions
+
+- Type aliases
+
+- Coroutines
+
+---
+
+template: divider
+# Null Safety
+
+---
+
+# Nullable Types and Non-Null Types
+
+Kotlin distinguishes between nullable references
+```
+var nullableName: String? = "Kotlin"
+nullableName.length // compilation error
+nullableName = null
+```
+and non-null references:
+
+```
+var nullSafeName: String = "Kotlin"
+nullSafeName.length // guaranteed to not cause an NPE
+nullSafeName = null // compilation error
+```
+
+---
+
+# Safe Calls
+
+```
+val length = name?.length
+```
+Validates to name.length if name is not null, and null otherwise.
+
+Safe calls can be chained:
+```
+val length = company?.department?.team?.name?.length
+```
+Validates to null if any element of the chain is not null. Equivalent Java code:
+```java
+Integer length = null;
+if (company != null) {
+    if (company.department != null) {
+        if (company.department.team != null) {
+            length = company.department.team.name.length();
+        }
+    }
+}
+```
+
+---
+
+# Operators
+
+**Elvis Operator**
+
+```
+val length = if (name != null) name.length else -1
+```
+can be shortened to:
+```
+val length = name?.length ?: -1;
+```
+
+<br>
+**!! Operator** ("non-null asserted")
+
+```
+val length = name!!.length
+```
+`name!!` validates to non-null value of `name` if `name` is non-null and
+throw an NPE otherwise
+
+
 ---
 
 template: divider
