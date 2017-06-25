@@ -256,8 +256,33 @@ val length = name!!.length
 `name!!` validates to non-null value of `name` if `name` is non-null and
 throw an NPE otherwise
 
+---
+
+template: divider
+# Data Classes
 
 ---
+
+# Data Classes
+
+```
+​​​​`data` class Person(
+        val name: String,
+        var age: Int? = null
+)
+```
+
+The Kotlin compiler automatically generates universal methods from all
+properties declaed in the primary constructor:
+- `equals()`
+- `hashCode()`
+- `toString()`
+- `componentN` functions
+- `copy()`
+
+
+---
+
 
 template: divider
 # Thank you!
@@ -272,6 +297,7 @@ template: divider
     highlightLanguage: 'kotlin',
     highlightStyle: 'idea',
     highlightLines: true,
+    highlightSpans: true,
     navigation: {
       scroll: false  // disable nagivation using scroll
     }
