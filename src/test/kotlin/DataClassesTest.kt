@@ -3,6 +3,11 @@ import org.hamcrest.CoreMatchers.not
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Test
 
+private data class Person(
+        val name: String,
+        var age: Int? = null
+)
+
 class DataClassesTest {
 
     private val me = Person("Martin", 31)
@@ -40,8 +45,3 @@ class DataClassesTest {
     }
 
 }
-
-private data class Person(
-        val name: String,
-        var age: Int? = null
-)
