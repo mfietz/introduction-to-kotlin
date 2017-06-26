@@ -280,6 +280,22 @@ properties declared in the primary constructor:
 - `componentN` functions (enables use in *destructuring declarations*)
 - `copy()`
 
+---
+
+# Other differences to Java
+
+- All exceptions are unchecked
+
+- constructor is treated the same as a normal function, no new keyword
+
+- `==` translate to `equals` and is null safe
+
+ - `assertThat("Kotlin"), equalTo("Kotlin")`
+
+- `if ... else` and `try ... catch` are expressions - their result can be assigned to a value
+
+---
+
 class: center, middle
 
 
