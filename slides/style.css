@@ -14,7 +14,7 @@ h1, h2, h3 {
 }
 
 .remark-slide-number {
-  opacity: 1; /* default: 0.5 */
+  opacity: 0.75; /* default: 0.5 */
 }
 
 div.footer {
