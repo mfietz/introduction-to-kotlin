@@ -297,6 +297,28 @@ if (company != null) {
 
 ---
 
+# Smart Casts
+
+**Java**
+```java
+if (maybeString instance String) {
+  String str = (String) maybeString;
+  System.out.println(str)
+}
+```
+
+**Kotlin**
+```
+if (maybeString is String) {
+  println(maybeString.length)
+}
+```
+
+The Kotlin compiler can infer that once inside the if block the maybe string is indeed a string and performs the cast for us
+
+
+---
+
 # Operators
 
 **Elvis Operator**
