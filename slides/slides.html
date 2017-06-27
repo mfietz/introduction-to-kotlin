@@ -344,6 +344,48 @@ properties declared in the primary constructor:
 
 ---
 
+template: divider
+# Extension Functions
+
+---
+
+# The Java Way
+
+```java
+public class StringUtils {
+
+    public static boolean isPalindrom(String s) {
+        return s.length() > 0 &&
+          s.equals(new StringBuilder(s).reverse().toString());
+    }
+
+}
+```
+```java
+StringUtils.isPalindrom("anna")
+```
+
+---
+
+# Kotlin to the Rescue
+
+```
+fun String.isPalindrom() = this.isNotEmpty() && this == this.reversed()
+```
+
+The `this` keyword inside an extension function corresponds to the receiver object.
+In this case, the receiver object is the string the method is called upon.
+
+```
+"otto".isPalindrom()
+```
+
+<div style="text-align: center">
+<img src="images/feels-good-man.png" height="240">
+</div>
+
+---
+
 # Other differences to Java
 
 - All exceptions are unchecked
