@@ -1,4 +1,3 @@
-
 fun main(args: Array<String>) {
     var nullSafename: String = "Kotlin"
     nullSafename.length // guaranteed to not cause an NPE

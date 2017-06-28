@@ -1,6 +1,3 @@
-package de.mfietz
-
-
 fun main(args: Array<String>) {
     "otto".isPalindrom()
 }
