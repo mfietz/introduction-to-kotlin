@@ -339,6 +339,35 @@ val array: Array<Int> = arrayOf(17, 42)
 
 count: false
 
+# Data Types
+
+- Everything is an object, no primitive types
+
+- Kotlin compiler will automatically mal basic types back to JVM primitives when possible
+
+- values must be boxed when type is nullable or when used in generic
+
+```
+val int: `Int` = 42
+val long: `Long` = 42L
+val double: `Double` = 42.17
+val float: `Float` = 42.17F
+var hexadecimal: `Int` = 0xFF
+var binary: `Int` = 0b010101
+val isTrue: `Boolean` = 42 > 17
+val character: `Char` = 'c'
+val string: `String` = "this is a sentence"
+val rawString: `String` = """{ "key": "value" }"""
+val array: `Array<Int>` = arrayOf(17, 42)
+```
+
+<img src="images/you-dont-say.png" height="100">
+
+
+---
+
+count: false
+
 # Basic Types
 
 - Everything is an object, no primitive types
