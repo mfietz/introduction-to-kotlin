@@ -459,15 +459,32 @@ StringUtils.isPalindrom("anna")
 fun String.isPalindrom() = this.isNotEmpty() && this == this.reversed()
 ```
 
-The `this` keyword inside an extension function corresponds to the receiver object.
-In this case, the receiver object is the string the method is called upon.
+*`isNotEmpty` and `reversed()` are extension functions provided by the Kotlin Standard Library.*
 
+Usage:
+```
+"otto".isPalindrom()
+```
+
+---
+
+count: false
+# Kotlin to the Rescue
+
+```
+fun String.isPalindrom() = this.isNotEmpty() && this == this.reversed()
+```
+
+*`isNotEmpty` and `reversed()` are extension functions provided by the Kotlin Standard Library.*
+
+Usage:
 ```
 "otto".isPalindrom()
 ```
 
 <div style="text-align: center">
-<img src="images/feels-good-man.png" height="240">
+<img src="images/feels-good-man.png" height="240"><br>
+<i>Feels Good</i>
 </div>
 
 ---
