@@ -1,7 +1,5 @@
 import junit.framework.Assert.assertFalse
 import junit.framework.Assert.assertTrue
-import org.hamcrest.CoreMatchers.equalTo
-import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Test
 import java.io.IOException
 
