@@ -516,7 +516,7 @@ properties declared in the primary constructor:
 - `equals()`
 - `hashCode()`
 - `toString()`
-- `componentN` functions (enables use in *destructuring declarations*)
+- `componentN` functions (enables usage in *destructuring declarations*)
 - `copy()`
 
 ---
@@ -557,8 +557,6 @@ Usage:
 "otto".isPalindrom()
 ```
 
-No magic, extension functions are compiled to static functions
-
 ---
 
 count: false
@@ -579,6 +577,20 @@ Usage:
 <img src="images/feels-good-man.png" height="240"><br>
 <i>Feels Good</i>
 </div>
+
+---
+
+# Calling Extension Functions from Java
+
+No magic.
+
+Extension functions are compiled to static functions.
+
+An extension function declared in a Kotlin source file `StringExtensions.kt`
+is accessible as a static method in the Java class `StringExtensionsKt`:
+```java
+StringExtensionsKt.isPalindrom("otto");
+```
 
 ---
 
