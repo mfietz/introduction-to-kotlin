@@ -376,7 +376,6 @@ val array: `Array<Int>` = arrayOf(17, 42)
 
 <img src="images/you-dont-say.png" height="100">
 
-
 ---
 
 count: false
@@ -446,7 +445,7 @@ Validates to name.length if name is not null, and null otherwise.
 
 Safe calls can be chained:
 ```
-val length = company?.department?.team?.name?.length
+val length: Int`?` = company?.department?.team?.name?.length
 ```
 Validates to null if any element of the chain is not null. Equivalent Java code:
 ```java
@@ -493,7 +492,7 @@ val length = if (name != null) name.length else -1
 ```
 can be shortened to:
 ```
-val length = name?.length ?: -1;
+val length: `Int` = name?.length ?: -1;
 ```
 
 <br>
@@ -503,7 +502,7 @@ val length = name?.length ?: -1;
 val length = name!!.length
 ```
 `name!!` validates to non-null value of `name` if `name` is non-null and
-throw an NPE otherwise
+throws an NPE otherwise
 
 ---
 
