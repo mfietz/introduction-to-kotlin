@@ -737,6 +737,75 @@ class LowerCaseString(val `str`: String) : CharSequence by `str` {
 The `LowerCaseString` class inherits from the `CharSequence` interface and
  delegates all of its public, non-overwritten methods to the `string` object.
 
+---
+
+template: divider
+
+# Delegated Properties
+
+---
+# Delegated Properties
+
+Syntax:
+```
+val/var <property name>: <Type> by <expression>
+```
+e.g.
+```
+class Example {
+    var str: String by Delegate()
+}
+```
+
+Standard delegates:
+- lazy property: value is only computed upon first access
+- observable property: listeners get notified about changes to this property
+- storing properties in a map, instead of a separate field for each property
+
+---
+
+# Delegated Properties
+
+Syntax:
+```
+val/var <property name>: <Type> by <expression>
+```
+e.g.
+```
+class Example {
+    var str: String by Delegate()
+}
+```
+
+Standard delegates:
+- <span style="background: #F9F8A5">lazy property: value is only computed upon first access</span>
+- observable property: listeners get notified about changes to this property
+- vetoable property: intercept assignment and block modification
+- storing properties in a map, instead of a separate field for each property
+
+... or write your own *custom* property delegate!
+
+---
+
+# Lazy property
+
+Heavy objects may affect application startup time and actually never be called.
+
+```
+class StringCache {
+
+    val cachedString by lazy {
+        expensiveComputation()
+    }
+
+    private fun expensiveComputation(): String {
+      ...
+    }
+
+}
+```
+
+The evaluation of lazy properties is *synchronized* by default.
 
 ---
 
@@ -769,7 +838,6 @@ template: divider
 </div>
 
 ---
-
 
 template: divider
 # Thank you!
