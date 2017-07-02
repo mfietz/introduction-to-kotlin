@@ -12,10 +12,10 @@ public class JavaLowerCaseString implements CharSequence {
 
     @Override
     public char charAt(int index) {
-        return str.charAt(index);
+        return Character.toLowerCase(str.charAt(index));
     }
 
-            public CharSequence subSequence(int startIndex, int endIndex) {
-    return str.subSequence(startIndex, endIndex);
-   }
+    public CharSequence subSequence(int startIndex, int endIndex) {
+        return str.subSequence(startIndex, endIndex);
+    }
 }

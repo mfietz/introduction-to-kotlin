@@ -696,9 +696,9 @@ public class LowerCaseString implements CharSequence {
 
    public String toString() { return str.toLowerCase(); }
 
-   `public int length() { return str.length(); }`
+   public char charAt(int index) { return Character.toLowerCase(str.charAt(index)); }
 
-   `public char charAt(int index) { return str.charAt(index); }`
+   `public int length() { return str.length(); }`
 
    `public CharSequence subSequence(int startIndex, int endIndex) {`
    `  return str.subSequence(startIndex, endIndex);`
@@ -706,7 +706,7 @@ public class LowerCaseString implements CharSequence {
 }
 ```
 
-<span style="background: #F9F8A5">Boilerplate</span> - YUK!
+<span style="background: #F9F8A5">Boilerplate</span>
 
 ---
 
@@ -716,9 +716,9 @@ public class LowerCaseString implements CharSequence {
 ```
 class LowerCaseString(val str: String) : CharSequence by str {
 
-    override fun toString(): String {
-        return str.toLowerCase()
-    }
+    override fun toString() = str.toLowerCase()
+
+    override fun get(index: Int) = str.get(index).toLowerCase()
 
 }
 ```
