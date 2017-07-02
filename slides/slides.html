@@ -848,9 +848,13 @@ template: divider
 
 - `==` translate to `equals` and is null safe
 
- - `assertThat("Kotlin"), equalTo("Kotlin")`
+ - `assertThat("Kotlin", equalTo("Kotlin"))`
 
 - `if ... else` and `try ... catch` are expressions - their result can be assigned to a value
+ -
+```
+ val maybe = if (Math.random() < 0.5) "Yay!" else "Nay!"
+```
 
 - Classes are final by default
 
