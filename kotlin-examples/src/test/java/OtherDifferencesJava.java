@@ -24,6 +24,7 @@ public class OtherDifferencesJava {
         assertTrue(person.equals(samePerson));
     }
 
+
     private void throwException() throws IOException {
         throw new IOException("This is a checked exception");
     }

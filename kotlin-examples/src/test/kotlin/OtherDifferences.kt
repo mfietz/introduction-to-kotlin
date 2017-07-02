@@ -43,6 +43,12 @@ class OtherDifferences {
         assertTrue(exceptionWasCaught)
     }
 
+    @Test
+    fun classesAreFinalByDefault() {
+        // compilation error:
+        // val student = object : Person("") {}
+    }
+
     private fun throwException() {
         throw IOException("This is a checked exception in Java")
     }
