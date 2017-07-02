@@ -611,12 +611,11 @@ said string in lowercase:
 LowerCase("Kotlin").toString() == "kotlin"
 ```
 
-
-
+<p>&nbsp;</p>
 *Lame example, please bear with me...*
 
 *The point is: We want to delegate most of the function calls directy to the given
-object and only overwrite a few.*
+object and only customize a few methods.*
 
 ---
 
@@ -753,7 +752,7 @@ val/var <property name>: <Type> by <expression>
 e.g.
 ```
 class Example {
-    var str: String by Delegate()
+    val str: String by Delegate()
 }
 ```
 
