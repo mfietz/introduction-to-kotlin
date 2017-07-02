@@ -438,16 +438,35 @@ nullSafeName = null // compilation error
 
 # Safe Calls
 
+**Safe Call Operator**
+
 ```
 val length = name?.length
 ```
-Validates to name.length if name is not null, and null otherwise.
+is equivalent to
+```
+val length: Int? = if (name != null) name.length else null
+```
 
-Safe calls can be chained:
+**Execute if not null**
+
+```
+name?.let {
+    ... // execute this block if not null
+}
+```
+---
+
+# Safe Calls (cont'd)
+
+**Safe calls chain**
+
 ```
 val length: Int`?` = company?.department?.team?.name?.length
 ```
-Validates to null if any element of the chain is not null. Equivalent Java code:
+Validates to null if any element of the chain is not null.
+
+In Java:
 ```java
 Integer length = null;
 if (company != null) {
