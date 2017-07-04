@@ -1214,13 +1214,69 @@ The evaluation of lazy properties is *synchronized* by default.
 
 ---
 
+template: divider
+
+# Misc
+
+---
+
+# Influenced by Effective Java?¹
+
+| &nbsp; | &nbsp; | |
+| -- | -- | -- |
+| Item 2: &nbsp; | Builders &nbsp; | → default and named parameters
+| &nbsp;  | &nbsp; | |
+| Item 3: &nbsp; | Creation of singletons &nbsp; | → object declaration
+| &nbsp; | &nbsp;  | |
+| Item 14: &nbsp;  | Use accessor methods, &nbsp;  | → properties with auto-generated default
+| &nbsp; | not public fields | &nbsp; &nbsp;  &nbsp;setters and getters |
+| &nbsp; | &nbsp; |
+| Item 15: &nbsp; | Minimize mutability &nbsp;  | → data classes, immutable collections
+| &nbsp; | &nbsp; |
+| Item 17: | Design and document for  | → final classes by default |
+| &nbsp;   | inheritance or else prohibit it
+
+<div class="footnote">
+<hr>
+<span class="footnote">¹ Sources: <a href="https://hackernoon.com/how-effective-java-may-have-influenced-the-design-of-kotlin-part-1-45fd64c2f974">https://hackernoon.com/</a> &
+  <a href="https://medium.com/@lukleDev/how-effective-java-may-have-influenced-the-design-of-kotlin-part-2-89844d62ddf3">https://medium.com/@lukleDev/</a></span>
+</div>
+
+---
+
+# Influenced by Effective Java?¹ (cont'd)
+
+| &nbsp; | &nbsp; | |
+| -- | -- | -- |
+| Item 23: | Don’t use raw types in new code &nbsp;| → no raw types |
+| &nbsp; | &nbsp; |
+| Item 28: | Use bounded wild cards to increase | → easier way of defining variance
+| &nbsp; | API flexibility | &nbsp; |
+| &nbsp; | &nbsp; | &nbsp; |
+| Item 36: &nbsp; | Consistently use `@Override` &nbsp; | → `override` as mandatory keyword
+| &nbsp;  | &nbsp; | |
+| Item 43: | Return empty arrays or collections, &nbsp;| → null safety |
+| &nbsp;  | not nulls | |
+| &nbsp;  | &nbsp; | |
+| Item 59: &nbsp; | Avoid unnecessary use &nbsp; | → no checked exceptions |
+| &nbsp;  | of checked exceptions | |
+| &nbsp;  | &nbsp; | |
+
+<div class="footnote">
+<hr>
+<span class="footnote">¹ Sources: <a href="https://hackernoon.com/how-effective-java-may-have-influenced-the-design-of-kotlin-part-1-45fd64c2f974">https://hackernoon.com/</a> &
+  <a href="https://medium.com/@lukleDev/how-effective-java-may-have-influenced-the-design-of-kotlin-part-2-89844d62ddf3">https://medium.com/@lukleDev/</a></span>
+</div>
+
+---
+
 # Things I skipped
 
 - Operator overloading
 
 - Packages
 
-- When expression
+- `when` expression
 
 - Nested Classes
 
