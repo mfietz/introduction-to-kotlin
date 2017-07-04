@@ -834,7 +834,10 @@ class Example {
 Standard delegates:
 - lazy property: value is only computed upon first access
 - observable property: listeners get notified about changes to this property
+- vetoable property: intercept assignment and block modification
 - storing properties in a map, instead of a separate field for each property
+
+... or write your own *custom* property delegate!
 
 ---
 
@@ -847,7 +850,7 @@ val/var <property name>: <Type> by <expression>
 e.g.
 ```
 class Example {
-    var str: String by Delegate()
+    val str: String by Delegate()
 }
 ```
 
