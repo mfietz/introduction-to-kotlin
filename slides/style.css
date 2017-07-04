@@ -32,6 +32,12 @@ div.bottombox h1, h2, h3 {
   color: white;
 }
 
+blockquote {
+  border-left: 0.3em solid rgba(0,0,0,0.5);
+  padding: 0 15px;
+  font-style: italic;
+}
+
 div.footnote {
   position: absolute;
   bottom: 1.5em;

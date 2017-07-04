@@ -405,7 +405,12 @@ val array = arrayOf(17, 42)
 
 ---
 
+# Field Notation?
+
 The language tries to avoid boilerplate code as much as possible so we do not call getters/setters explicitly – we can simply use them using the field notation.
+
+---
+
 template: divider
 # Null Safety
 
@@ -624,161 +629,43 @@ StringExtensionsKt.isPalindrom("otto");
 ---
 
 template: divider
-
-# Delegation
 # Functions
 
 ---
 
-# Task
-
-Create a class that holds a string. Its `toString()` method returns
-said string in lowercase:
 # Default Arguments
 
 ```
-LowerCase("Kotlin").toString() == "kotlin"
-```
-
-<p>&nbsp;</p>
-*Lame example, please bear with me...*
-
-*The point is: We want to delegate most of the function calls directy to the given
-object and only customize a few methods.*
-
----
-
-# Class Delegation
-
-(Object) Composition over inheritance: alternative to implementation inheritance
-
-<div style="text-align: center">
-<img src="images/delegation.jpg" height="300"><br>
-<i>Source: http://best-practice-software-engineering.ifs.tuwien.ac.at</i>
-</div>
-
----
-
-# Class Delegation in Java
-
-```java
-public class LowerCaseString implements CharSequence {
-
-   private final String str;
-
-   public LowerCaseString(String str) { this.str = str; }
-
-   public String toString() { return str.toLowerCase(); }
-
-   public int length() { return str.length(); }
-
-   public char charAt(int index) { return str.charAt(index); }
-
-   public CharSequence subSequence(int startIndex, int endIndex) {
-      return str.subSequence(startIndex, endIndex);
-   }
 fun hallo(name: String = "World"): String {
     return "Hallo ${name}"
 }
 ```
 
----
-
-# Class Delegation in Java
-
-```java
-public class LowerCaseString implements CharSequence {
-
-   private final String str;
-
-   public LowerCaseString(String str) { this.str = str; }
-
-   `public String toString() { return str.toLowerCase(); }`
-
-   public int length() { return str.length(); }
-
-   public char charAt(int index) { return str.charAt(index); }
-
-   public CharSequence subSequence(int startIndex, int endIndex) {
-      return str.subSequence(startIndex, endIndex);
-   }
-}
 ```
 >>> hallo("Kotlin")
 Hallo kotlin
 
-<span style="background: #F9F8A5">Implementation of Task</span>
-
----
-
-# Class Delegation in Java
-
-```java
-public class LowerCaseString implements CharSequence {
-
-   private final String str;
-
-   public LowerCaseString(String str) { this.str = str; }
-
-   public String toString() { return str.toLowerCase(); }
-
-   public char charAt(int index) { return Character.toLowerCase(str.charAt(index)); }
-
-   `public int length() { return str.length(); }`
-
-   `public CharSequence subSequence(int startIndex, int endIndex) {`
-   `  return str.subSequence(startIndex, endIndex);`
-   `}`
-}
 >>> hallo()
 Hallo World
 ```
-
-<span style="background: #F9F8A5">Boilerplate</span>
-
 ---
 
-
-# Class Delegation in Kotlin
 # Named Arguments
 
 ```
-class LowerCaseString(val str: String) : CharSequence by str {
-
-    override fun toString() = str.toLowerCase()
-
-    override fun get(index: Int) = str.get(index).toLowerCase()
-
-}
 data class Person(
         val name: String,
         val age: Int
 )
 ```
 
-The `LowerCaseString` class inherits from the `CharSequence` interface and
- delegates all of its public, non-overwritten methods to the `string` object.
-
----
-
-# Class Delegation in Kotlin
-
 ```
-class LowerCaseString(val `str`: String) : CharSequence by `str` {
-
-    override fun toString(): String {
-        return `str`.toLowerCase()
-    }
 >>> Person("Kotlin", 6)
 Person(name=Kotlin, age=6)
 
-}
-```
 >>> Person(name = "Kotlin", age = 6)
 Person(name=Kotlin, age=6)
 
-The `LowerCaseString` class inherits from the `CharSequence` interface and
- delegates all of its public, non-overwritten methods to the `string` object.
 Person("Kotlin", age = 6)
 Person(name=Kotlin, age=6)
 
@@ -787,13 +674,151 @@ Person(name=Kotlin, age=1)
 ```
 ---
 
+# Single-Expression functions
+
+```
+fun hallo(name: String = "World"): String {
+    return "Hallo ${name}"
+}
+```
+
+When a function returns a single expression, the curly braces can be omitted:
+
+```
+fun hallo(name: String = "World"): String `=` "Hallo ${name}"
+```
+
+Explicitly declaring the return type is optional when it can be inferred by the compiler:
+
+```
+fun hallo(name: String = "World") = "Hallo ${name}"
+```
+
+---
+
 template: divider
 
-# Delegated Properties
+# Delegation
+
+---
+
+# BiMap
+
+> A `BiMap<K, V>` is a `Map<K, V>` that
+>
+> * allows you to view the "inverse" BiMap<V, K> with inverse()
+> * ensures that values are unique, making values() a Set
+
+<br>
+*Source: https://github.com/google/guava/wiki/NewCollectionTypesExplained#bimap*
+
+---
+
+# BiMap in Java
+
+```java
+public class SimpleBiMap<K,V> extends HashMap<K,V> implements BiMap<K,V> {
+
+    public SimpleBiMap() { super(); }
+
+    public SimpleBiMap(Map<K, V> collect) { super(collect); }
+
+    @Override
+    public V put(K key, V value) {
+        if(keySet().contains(key)) {
+            throw new IllegalArgumentException("Keys must be unique");
+        }
+        if(values().contains(value)) {
+            throw new IllegalArgumentException("Values must be unique");
+        }
+        return super.put(key, value);
+    }
+
+
+    @Override
+    public Map<V, K> inverse() {
+        Map<V, K> inversed = entrySet().stream().collect(toMap(Entry::getValue, Entry::getKey));
+        return new SimpleBiMap<>(inversed);
+    }
+
+}
+```
+
+---
+
+# Class Delegation
+
+Effective java Item 16:<br>
+Favour composition over inheritance Composition over inheritance
+
+<div style="text-align: center">
+<img src="images/delegation.jpg" height="300"><br>
+<i>Source: http://best-practice-software-engineering.ifs.tuwien.ac.at</i>
+</div>
+
+---
+
+# BiMap in Java - with Delegation
+
+```java
+public class SimpleBiMap<K,V> implements BiMap<K,V> {
+
+  private final HashMap<K, V> map = new HashMap();
+
+  [...]
+
+  public int size() { return map.size(); }
+
+  public boolean isEmpty() { return map.isEmpty(); }
+
+  public boolean containsValue(Object value) { return map.containsValue(value); }
+
+  public boolean containsKey(Object key) { return map.containsKey(key); }
+
+  public V get(Object key) { return map.get(key); }
+
+  public V put(K key, V value) { return map.put(key, value); }
+
+  public V remove(Object key) { return map.remove(key); }
+
+  public void putAll(Map<? extends K, ? extends V> m) { map.putAll(m);}
+
+  [...]
+
+}
+```
+---
+
+# Class Delegation in Kotlin
+
+```
+interface BiMap<K, V> : MutableMap<K, V> {
+    fun inverse(): Map<V, K>
+}
+```
+
+```
+class SimpleBiMapKt<K,V>(val map: HashMap<K,V> = HashMap()) : BiMap<K,V>, MutableMap<K,V> by map {
+
+    override fun put(key: K, value: V): V? {
+        if(map.containsKey(key)) {
+            throw IllegalArgumentException("Keys must be unique")
+        }
+        if(map.containsValue(value)) {
+            throw IllegalArgumentException("Values must be unique")
+        }
+        return map.put(key, value)
+    }
+
+    override fun inverse(): Map<V, K> {
+        return map.entries.map { (k,v) -> Pair(v,k) }.toMap()
+    }
+
+}
+```
 
 ---
 # Delegated Properties
-# Single-Expression functions
 
 Syntax:
 ```
@@ -803,8 +828,6 @@ e.g.
 ```
 class Example {
     val str: String by Delegate()
-fun hallo(name: String = "World"): String {
-    return "Hallo ${name}"
 }
 ```
 
@@ -816,12 +839,10 @@ Standard delegates:
 ---
 
 # Delegated Properties
-When a function returns a single expression, the curly braces can be omitted:
 
 Syntax:
 ```
 val/var <property name>: <Type> by <expression>
-fun hallo(name: String = "World"): String `=` "Hallo ${name}"
 ```
 e.g.
 ```
@@ -843,7 +864,6 @@ Standard delegates:
 # Lazy property
 
 Heavy objects may affect application startup time and actually never be called.
-Explicitly declaring the return type is optional when it can be inferred by the compiler:
 
 ```
 class StringCache {
@@ -857,7 +877,6 @@ class StringCache {
     }
 
 }
-fun hallo(name: String = "World") = "Hallo ${name}"
 ```
 
 The evaluation of lazy properties is *synchronized* by default.
@@ -892,6 +911,8 @@ template: divider
 
 # Things I skipped
 
+- Operator overloading
+
 - Packages
 
 - When expression
@@ -914,7 +935,7 @@ template: divider
 
 - Kotlin Koans: https://try.kotlinlang.org/
 
-- <img align="top" src="images/kotlin-in-action.jpg" height="160"><br>*Kotlin in Action* by Dmitry Jemerov and Svetlana Isakova 
+- <img align="top" src="images/kotlin-in-action.jpg" height="160"><br>*Kotlin in Action* by Dmitry Jemerov and Svetlana Isakova
 
 - Java Top Blogs: https://www.topjavablogs.com/
 
