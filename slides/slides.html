@@ -720,6 +720,119 @@ fun hallo(name: String = "World") = "Hallo ${name}"
 
 template: divider
 
+# Java Interoperability
+
+---
+
+# Calling Java code from Kotlin
+
+> Pretty much all Java code can be used without any issues
+
+<br>
+**Null-Safety and Platform Types**
+
+```
+val list = ArrayList<String>()
+val value: `???` = list[0]
+```
+
+---
+
+count: false
+
+# Calling Java code from Kotlin
+
+> Pretty much all Java code can be used without any issues
+
+<br>
+**Null-Safety and Platform Types**
+
+```
+val list = ArrayList<String>()
+val value: `String` = list[0]
+```
+
+---
+
+count: false
+
+# Calling Java code from Kotlin
+
+> Pretty much all Java code can be used without any issues
+
+<br>
+**Null-Safety and Platform Types**
+
+```
+val list = ArrayList<String>()
+val value: `String?` = list[0]
+```
+
+<div style="text-align: center">
+<img src="images/confused.png" height="150"><br>
+</div>
+
+---
+
+count: false
+
+# Calling Java code from Kotlin
+
+> Pretty much all Java code can be used without any issues
+
+<br>
+**Null-Safety and Platform Types**
+
+```
+val list = ArrayList<String>()
+val nullable: `String?` = list[0] // allowed, safe
+val notNull:  `String`  = list[0] // allowed, may throw an exception
+```
+
+- any reference in Java may be `null`
+
+- strict null-safety impractical for calling Java
+
+<br>
+*Platform Types*
+
+- Null-checks are relaxed
+
+- Kotlin does not issue nullability errors at compile time, but calls may fail at runtime
+
+---
+
+# Calling Kotlin code from Java
+
+**Static Methods**
+
+```
+class Foo {
+    companion object {
+        `@JvmStatic` fun bar() {}
+    }
+}
+```
+
+Kotlin can only generate static methods for functions defined in named objects or companion objects.
+
+```java
+Foo.bar()
+```
+
+**Overloads Generation**
+
+```
+data class Person `@JvmOverloads constructor`(val name: String, var age: Int? = null)
+```
+
+```java
+new Person("Martin");
+new Person("Martin", 31);
+```
+
+---
+
 # Differences to Java
 
 - All exceptions are unchecked
@@ -740,6 +853,9 @@ template: divider
 - Classes are final by default
 
 ---
+
+template: divider
+
 # Collections
 
 ---
@@ -980,6 +1096,9 @@ class SimpleBiMapKt<K,V>(val map: HashMap<K,V> = HashMap()) : BiMap<K,V>, Mutabl
 ```
 
 ---
+
+count: false
+
 # Delegated Properties
 
 Syntax:

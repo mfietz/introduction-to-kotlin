@@ -1,4 +1,4 @@
-data class Person(
+data class Person @JvmOverloads constructor(
         val name: String,
         var age: Int? = null
 )
