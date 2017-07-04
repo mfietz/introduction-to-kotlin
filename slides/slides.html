@@ -747,6 +747,48 @@ true
 
 template: divider
 
+# Higher Order Functions
+
+---
+
+# Higher Order Functions
+
+a function that takes functions as parameters, or returns a function
+
+```
+fun apply(operation: (Int, Int) -> Int, first: Int, second: Int): Int {
+    return operation(first, second)
+}
+
+fun mult(): (Int, Int) -> Int = { x, y -> x + y }
+```
+
+```
+>>> apply({ x, y -> x + y }, 2, 3)
+5
+>>> apply(mult(), 2, 3)
+6
+```
+---
+
+# Single Parameter: it
+
+```
+>>> val list = listOf(1,2,3)
+>>> list.map { i -> i * 2 }
+[2, 4, 6]
+```
+
+If a lambda only has one parameter, its declaration along with `->` can be omitted:
+```
+>>> list.map { `it` * 2 }
+[2, 4, 6]
+```
+
+---
+
+template: divider
+
 # Delegation
 
 ---
