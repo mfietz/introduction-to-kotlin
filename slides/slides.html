@@ -720,6 +720,26 @@ fun hallo(name: String = "World") = "Hallo ${name}"
 
 template: divider
 
+# Differences to Java
+
+- All exceptions are unchecked
+
+- constructor is treated the same as a normal function, no new keyword
+
+- `==` translate to `equals` and is null safe
+ -
+ ```
+ assertTrue(Person("Martin") == Person("Martin")) // structural equality
+```
+- `if ... else` and `try ... catch` are expressions - their result can be assigned to a value
+
+ ```
+ val maybe = if (Math.random() < 0.5) "Yay!" else "Nay!"
+```
+
+- Classes are final by default
+
+---
 # Collections
 
 ---
@@ -1025,32 +1045,6 @@ class StringCache {
 ```
 
 The evaluation of lazy properties is *synchronized* by default.
-
----
-
-template: divider
-
-# Misc
-
----
-
-# Other differences to Java
-
-- All exceptions are unchecked
-
-- constructor is treated the same as a normal function, no new keyword
-
-- `==` translate to `equals` and is null safe
-
- - `assertThat("Kotlin", equalTo("Kotlin"))`
-
-- `if ... else` and `try ... catch` are expressions - their result can be assigned to a value
- -
-```
- val maybe = if (Math.random() < 0.5) "Yay!" else "Nay!"
-```
-
-- Classes are final by default
 
 ---
 
