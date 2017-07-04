@@ -626,6 +626,7 @@ StringExtensionsKt.isPalindrom("otto");
 template: divider
 
 # Delegation
+# Functions
 
 ---
 
@@ -633,6 +634,7 @@ template: divider
 
 Create a class that holds a string. Its `toString()` method returns
 said string in lowercase:
+# Default Arguments
 
 ```
 LowerCase("Kotlin").toString() == "kotlin"
@@ -675,6 +677,8 @@ public class LowerCaseString implements CharSequence {
    public CharSequence subSequence(int startIndex, int endIndex) {
       return str.subSequence(startIndex, endIndex);
    }
+fun hallo(name: String = "World"): String {
+    return "Hallo ${name}"
 }
 ```
 
@@ -700,6 +704,8 @@ public class LowerCaseString implements CharSequence {
    }
 }
 ```
+>>> hallo("Kotlin")
+Hallo kotlin
 
 <span style="background: #F9F8A5">Implementation of Task</span>
 
@@ -724,6 +730,8 @@ public class LowerCaseString implements CharSequence {
    `  return str.subSequence(startIndex, endIndex);`
    `}`
 }
+>>> hallo()
+Hallo World
 ```
 
 <span style="background: #F9F8A5">Boilerplate</span>
@@ -732,6 +740,7 @@ public class LowerCaseString implements CharSequence {
 
 
 # Class Delegation in Kotlin
+# Named Arguments
 
 ```
 class LowerCaseString(val str: String) : CharSequence by str {
@@ -741,6 +750,10 @@ class LowerCaseString(val str: String) : CharSequence by str {
     override fun get(index: Int) = str.get(index).toLowerCase()
 
 }
+data class Person(
+        val name: String,
+        val age: Int
+)
 ```
 
 The `LowerCaseString` class inherits from the `CharSequence` interface and
@@ -756,13 +769,22 @@ class LowerCaseString(val `str`: String) : CharSequence by `str` {
     override fun toString(): String {
         return `str`.toLowerCase()
     }
+>>> Person("Kotlin", 6)
+Person(name=Kotlin, age=6)
 
 }
 ```
+>>> Person(name = "Kotlin", age = 6)
+Person(name=Kotlin, age=6)
 
 The `LowerCaseString` class inherits from the `CharSequence` interface and
  delegates all of its public, non-overwritten methods to the `string` object.
+Person("Kotlin", age = 6)
+Person(name=Kotlin, age=6)
 
+>>> Person(age=6, name="Kotlin")
+Person(name=Kotlin, age=1)
+```
 ---
 
 template: divider
@@ -771,6 +793,7 @@ template: divider
 
 ---
 # Delegated Properties
+# Single-Expression functions
 
 Syntax:
 ```
@@ -780,6 +803,8 @@ e.g.
 ```
 class Example {
     val str: String by Delegate()
+fun hallo(name: String = "World"): String {
+    return "Hallo ${name}"
 }
 ```
 
@@ -791,10 +816,12 @@ Standard delegates:
 ---
 
 # Delegated Properties
+When a function returns a single expression, the curly braces can be omitted:
 
 Syntax:
 ```
 val/var <property name>: <Type> by <expression>
+fun hallo(name: String = "World"): String `=` "Hallo ${name}"
 ```
 e.g.
 ```
@@ -816,6 +843,7 @@ Standard delegates:
 # Lazy property
 
 Heavy objects may affect application startup time and actually never be called.
+Explicitly declaring the return type is optional when it can be inferred by the compiler:
 
 ```
 class StringCache {
@@ -829,6 +857,7 @@ class StringCache {
     }
 
 }
+fun hallo(name: String = "World") = "Hallo ${name}"
 ```
 
 The evaluation of lazy properties is *synchronized* by default.
