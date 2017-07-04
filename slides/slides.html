@@ -683,20 +683,6 @@ Usage:
 
 ---
 
-# Calling Extension Functions from Java
-
-No magic.
-
-Extension functions are compiled to static functions.
-
-An extension function declared in a Kotlin source file `StringExtensions.kt`
-is accessible as a static method in the Java class `StringExtensionsKt`:
-```java
-StringExtensionsKt.isPalindrom("otto");
-```
-
----
-
 template: divider
 # Functions
 
@@ -877,6 +863,20 @@ data class Person `@JvmOverloads constructor`(val name: String, var age: Int? = 
 ```java
 new Person("Martin");
 new Person("Martin", 31);
+```
+
+---
+
+# Calling Kotlin code from Java (cont'd)
+
+**Extension Functions**
+
+Extension functions are compiled to static functions.
+
+An extension function declared in a Kotlin source file `StringExtensions.kt`
+is accessible as a static method in the Java class `StringExtensionsKt`:
+```java
+StringExtensionsKt.isPalindrom("otto");
 ```
 
 ---
