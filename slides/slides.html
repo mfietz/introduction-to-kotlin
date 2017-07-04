@@ -787,6 +787,35 @@ If a lambda only has one parameter, its declaration along with `->` can be omitt
 
 ---
 
+# Kotlin for DLSs
+
+Parentheses in a call can be omitted entirely if the lambda is the only argument to that call.
+
+```
+>>> val people = listOf(Person("Alice", 17), Person("Bob", 42))
+>>> people.maxBy({ it.age ?: 0 })
+Person(name=Bob, age=42)
+>>> people.maxBy { it.age ?: 0 }
+Person(name=Bob, age=42)
+```
+
+Example from Anko Layouts¹:
+```
+verticalLayout {
+    val name = editText()
+    button("Say Hello") {
+        onClick { toast("Hello, ${name.text}!") }
+    }
+}
+```
+
+<div class="footnote">
+<hr>
+<span class="footnote">¹ https://github.com/Kotlin/anko/wiki/Anko-Layouts</i></span>
+</div>
+
+---
+
 template: divider
 
 # Delegation
