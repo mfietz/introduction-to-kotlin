@@ -429,9 +429,53 @@ val array = arrayOf(17, 42)
 
 ---
 
-# Field Notation?
+# Properties and Fields
 
-The language tries to avoid boilerplate code as much as possible so we do not call getters/setters explicitly – we can simply use them using the field notation.
+Classes in Kotlin cannot have fields, they have properties.
+
+```
+
+val me = Person("Martin", 31)
+me.name     // getter
+me.age = 32 // setter
+```
+
+<br>
+**Getters and Setters**<br>
+
+```
+var <propertyName>[: <PropertyType>] [= <property_initializer>]
+    [<getter>]
+    [<setter>]
+```
+
+```
+val <propertyName>[: <PropertyType>] [= <property_initializer>]
+    [<getter>]
+```
+
+---
+
+# Properties and Fields (cont'd)
+
+
+**Backing Fields**
+
+Kotlin provides an automatic backing field which can be accessed using the `field` identifier
+
+```
+var counter = 0
+    get() = field
+    set(value) {
+        if (value >= 0) `field` = value
+    }
+```
+
+no backing field:
+```
+val isEmpty: Boolean
+    get() = this.size == 0
+```
 
 ---
 
