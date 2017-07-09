@@ -1011,11 +1011,9 @@ Parentheses in a call can be omitted entirely if the lambda is the only argument
 >>> val people = listOf(Person("Alice", 17), Person("Bob", 42))
 >>> people.maxBy({ it.age ?: 0 })
 Person(name=Bob, age=42)
->>> people.maxBy { it.age ?: 0 }
-Person(name=Bob, age=42)
 ```
 
-Example from Anko Layouts¹:
+Example from Anko Layouts (https://github.com/Kotlin/anko/wiki/Anko-Layouts):
 ```
 verticalLayout {
     val name = editText()
@@ -1025,10 +1023,12 @@ verticalLayout {
 }
 ```
 
-<div class="footnote">
-<hr>
-<span class="footnote">¹ https://github.com/Kotlin/anko/wiki/Anko-Layouts</i></span>
-</div>
+Mockito-Kotlin (https://github.com/nhaarman/mockito-kotlin):
+```
+val mock = mock<MyClass> {
+    on { text() } doReturn "mocked"
+}
+```
 
 ---
 
