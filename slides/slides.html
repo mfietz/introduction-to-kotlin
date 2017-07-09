@@ -214,149 +214,6 @@ template: divider
 ---
 
 template: divider
-# Environment Setup
-
----
-
-# Building with Maven
-
-```xml
-<properties>
- <kotlin.version>1.1.3</kotlin.version>
-</properties>
-```
-
-```xml
-<dependencies>
-  <dependency>
-    <groupId>org.jetbrains.kotlin</groupId>
-     <artifactId>kotlin-stdlib</artifactId>
-     <version>${kotlin.version}</version>
-  </dependency>
-</dependencies>
-```
-
-```xml
-<build>
-    <sourceDirectory>src/main/kotlin</sourceDirectory>
-    <testSourceDirectory>src/test/kotlin</testSourceDirectory>
-    ...
-```
-
----
-
-# Building with Maven (cont'd)
-
-```xml
-    <plugins>
-        <plugin>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-maven-plugin</artifactId>
-            <version>${kotlin.version}</version>
-            <executions>
-                <execution>
-                    <id>compile</id>
-                    <phase>compile</phase>
-                    <goals><goal>compile</goal></goals>
-                </execution>
-                <execution>
-                    <id>test-compile</id>
-                    <phase>test-compile</phase>
-                    <goals><goal>test-compile</goal></goals>
-                </execution>
-            </executions>
-        </plugin>
-    </plugins>
-</build>
-```
-*Source: https://kotlinlang.org/docs/reference/using-maven.html*
----
-
-# Building with Gradle
-
-```xml
-buildscript {
-    ext.kotlin_version = '1.1.3'
-
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-}
-```
-
-```groovy
-apply plugin: 'kotlin'
-```
-
-```groovy
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib"
-}
-```
-
----
-
-# Building with Gradle (cont'd)
-
-** Targeting Java 8:**
-```groovy
-dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
-}
-
-compileKotlin {
-    kotlinOptions.jvmTarget = "1.8"
-}
-compileTestKotlin {
-    kotlinOptions.jvmTarget = "1.8"
-}
-```
-
-*Source: https://kotlinlang.org/docs/reference/using-gradle.html*
----
-
-# IntelliJ IDEA
-
-* Install Kotlin plugin:<br>Preferences → Plugins → Browse repositories... → "Kotlin" → Install
-
-* New Project → Java/Gradle/Maven → Kotlin → ...
-
-<br>
-<div style="text-align: center">
-<img src="images/mission-accomplished.gif" height="150"><br>
-</div>
-
----
-
-# Command Line Compiler
-
-- Install
-
- - Download from https://github.com/JetBrains/kotlin/releases
-
- - macOS: `brew install kotlin`
-
-- Compile:
- ```
- kotlinc hello.kt [-include-runtime] -d hello.jar
- ```
-
-- REPL:
-```
-kotlinc-jvm
-```
-
-
----
-
-template: divider
 # Basics
 
 ---
@@ -972,7 +829,7 @@ template: divider
 a function that takes functions as parameters, or returns a function
 
 ```
-fun apply(operation: (Int, Int) -> Int, first: Int, second: Int): Int {
+fun apply(operation: `(Int, Int)`​` -> Int`, first: Int, second: Int): Int {
     return operation(first, second)
 }
 
@@ -1349,6 +1206,155 @@ template: divider
 
 ### Questions?
 
+---
+
+template: divider
+
+# Addendum
+
+---
+
+template: divider
+# Environment Setup
+
+---
+
+# Building with Maven
+
+```xml
+<properties>
+ <kotlin.version>1.1.3</kotlin.version>
+</properties>
+```
+
+```xml
+<dependencies>
+  <dependency>
+    <groupId>org.jetbrains.kotlin</groupId>
+     <artifactId>kotlin-stdlib</artifactId>
+     <version>${kotlin.version}</version>
+  </dependency>
+</dependencies>
+```
+
+```xml
+<build>
+    <sourceDirectory>src/main/kotlin</sourceDirectory>
+    <testSourceDirectory>src/test/kotlin</testSourceDirectory>
+    ...
+```
+
+---
+
+# Building with Maven (cont'd)
+
+```xml
+    <plugins>
+        <plugin>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-maven-plugin</artifactId>
+            <version>${kotlin.version}</version>
+            <executions>
+                <execution>
+                    <id>compile</id>
+                    <phase>compile</phase>
+                    <goals><goal>compile</goal></goals>
+                </execution>
+                <execution>
+                    <id>test-compile</id>
+                    <phase>test-compile</phase>
+                    <goals><goal>test-compile</goal></goals>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+```
+*Source: https://kotlinlang.org/docs/reference/using-maven.html*
+---
+
+# Building with Gradle
+
+```xml
+buildscript {
+    ext.kotlin_version = '1.1.3'
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+```
+
+```groovy
+apply plugin: 'kotlin'
+```
+
+```groovy
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib"
+}
+```
+
+---
+
+# Building with Gradle (cont'd)
+
+** Targeting Java 8:**
+```groovy
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+```
+
+*Source: https://kotlinlang.org/docs/reference/using-gradle.html*
+---
+
+# IntelliJ IDEA
+
+* Install Kotlin plugin:<br>Preferences → Plugins → Browse repositories... → "Kotlin" → Install
+
+* New Project → Java/Gradle/Maven → Kotlin → ...
+
+<br>
+<div style="text-align: center">
+<img src="images/mission-accomplished.gif" height="150"><br>
+</div>
+
+---
+
+# Command Line Compiler
+
+- Install
+
+ - Download from https://github.com/JetBrains/kotlin/releases
+
+ - macOS: `brew install kotlin`
+
+- Compile:
+ ```
+ kotlinc hello.kt [-include-runtime] -d hello.jar
+ ```
+
+- REPL:
+```
+kotlinc-jvm
+```
+
+---
 
 <!-- CONTEND END -->
 </textarea>
