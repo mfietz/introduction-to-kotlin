@@ -310,8 +310,8 @@ val int = 42
 val long = 42L
 val double = 42.17
 val float = 42.17F
-var hexadecimal = 0xFF
-var binary = 0b010101
+val hexadecimal = 0xFF
+val binary = 0b010101
 val isTrue = 42 > 17
 val character = 'c'
 val string = "this is a sentence"
@@ -324,7 +324,9 @@ val array = arrayOf(17, 42)
 
 # Properties and Fields
 
-Classes in Kotlin cannot have fields, they have properties.
+Classes in Kotlin cannot have fields, they have properties:
+- `var` keyword for mutable properties
+- `val` keyword for read-only properties
 
 ```
 
@@ -400,7 +402,6 @@ var nullSafeName: String = "Kotlin"
 nullSafeName.length // guaranteed to not cause an NPE
 nullSafeName = null // compilation error
 ```
-
 ---
 
 # Safe Calls
