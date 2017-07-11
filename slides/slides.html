@@ -219,150 +219,32 @@ template: divider
 ---
 
 template: divider
-# Environment Setup
+# Basics
 
 ---
 
-# Building with Maven
+# Variables
 
-```xml
-<properties>
- <kotlin.version>1.1.3</kotlin.version>
-</properties>
+**var - Mutable reference**
+
+- variable declared using `var` can be changed later in the program
+- corresponds to regular Java variable
+
 ```
-
-```xml
-<dependencies>
-  <dependency>
-    <groupId>org.jetbrains.kotlin</groupId>
-     <artifactId>kotlin-stdlib</artifactId>
-     <version>${kotlin.version}</version>
-  </dependency>
-</dependencies>
+var name = "Kotlin"
+name = "Java"
 ```
-
-```xml
-<build>
-    <sourceDirectory>src/main/kotlin</sourceDirectory>
-    <testSourceDirectory>src/test/kotlin</testSourceDirectory>
-    ...
-```
-
----
-
-# Building with Maven (cont'd)
-
-```xml
-    <plugins>
-        <plugin>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-maven-plugin</artifactId>
-            <version>${kotlin.version}</version>
-            <executions>
-                <execution>
-                    <id>compile</id>
-                    <phase>compile</phase>
-                    <goals><goal>compile</goal></goals>
-                </execution>
-                <execution>
-                    <id>test-compile</id>
-                    <phase>test-compile</phase>
-                    <goals><goal>test-compile</goal></goals>
-                </execution>
-            </executions>
-        </plugin>
-    </plugins>
-</build>
-```
-*Source: https://kotlinlang.org/docs/reference/using-maven.html*
----
-
-# Building with Gradle
-
-```xml
-buildscript {
-    ext.kotlin_version = '1.1.3'
-
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-}
-```
-
-```groovy
-apply plugin: 'kotlin'
-```
-
-```groovy
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib"
-}
-```
-
----
-
-# Building with Gradle (cont'd)
-
-** Targeting Java 8:**
-```groovy
-dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
-}
-
-compileKotlin {
-    kotlinOptions.jvmTarget = "1.8"
-}
-compileTestKotlin {
-    kotlinOptions.jvmTarget = "1.8"
-}
-```
-
-*Source: https://kotlinlang.org/docs/reference/using-gradle.html*
----
-
-# IntelliJ IDEA
-
-* Install Kotlin plugin:<br>Preferences → Plugins → Browse repositories... → "Kotlin" → Install
-
-* New Project → Java/Gradle/Maven → Kotlin → ...
 
 <br>
-<div style="text-align: center">
-<img src="images/mission-accomplished.gif" height="150"><br>
-</div>
+**val - Immutable reference**
 
----
+- variable declared using `val` cannot be changed once value is assigned
+- similar to `final` in Java
 
-# Command Line Compiler
-
-- Install
-
- - Download from https://github.com/JetBrains/kotlin/releases
-
- - macOS: `brew install kotlin`
-
-- Compile:
- ```
- kotlinc hello.kt [-include-runtime] -d hello.jar
- ```
-
-- REPL:
 ```
-kotlinc-jvm
+val name = "Kotlin"
+name = "Java" // compile error
 ```
-
-
----
-
-template: divider
-# Basics
 
 ---
 
@@ -433,8 +315,8 @@ val int = 42
 val long = 42L
 val double = 42.17
 val float = 42.17F
-var hexadecimal = 0xFF
-var binary = 0b010101
+val hexadecimal = 0xFF
+val binary = 0b010101
 val isTrue = 42 > 17
 val character = 'c'
 val string = "this is a sentence"
@@ -447,7 +329,9 @@ val array = arrayOf(17, 42)
 
 # Properties and Fields
 
-Classes in Kotlin cannot have fields, they have properties.
+Classes in Kotlin cannot have fields, they have properties:
+- `var` keyword for mutable properties
+- `val` keyword for read-only properties
 
 ```
 
@@ -523,7 +407,6 @@ var nullSafeName: String = "Kotlin"
 nullSafeName.length // guaranteed to not cause an NPE
 nullSafeName = null // compilation error
 ```
-
 ---
 
 # Safe Calls
@@ -675,6 +558,8 @@ Usage:
 "otto".isPalindrom()
 ```
 
+*Note: You do not have access to non-public methods or fields*
+
 ---
 
 count: false
@@ -691,8 +576,10 @@ Usage:
 "otto".isPalindrom()
 ```
 
+*Note: You do not have access to non-public methods or fields*
+
 <div style="text-align: center">
-<img src="images/feels-good-man.png" height="240"><br>
+<img src="images/feels-good-man.png" height="150"><br>
 <i>Feels Good</i>
 </div>
 
@@ -919,6 +806,102 @@ StringExtensionsKt.isPalindrom("otto");
 
 template: divider
 
+# Higher Order Functions & Lambdas
+
+---
+
+# Higher Order Functions
+
+a function that takes functions as parameters, or returns a function
+
+```
+fun apply(operation: `(Int, Int)`​` -> Int`, first: Int, second: Int): Int {
+    return operation(first, second)
+}
+
+fun mult(): (Int, Int) -> Int = { x, y -> x + y }
+```
+
+```
+>>> apply({ x, y -> x + y }, 2, 3)
+5
+>>> apply(mult(), 2, 3)
+6
+```
+---
+
+# Lambda
+
+is a "function literal": function that is not declared, but immediately passed as an expression
+- always surrounded by `{ ... }`
+
+```
+val people = listOf(Person("Alice", 23), Person("Bob", 42))
+people.maxBy( { person -> person.age } )
+```
+
+
+
+---
+
+# Single Parameter: it
+
+```
+>>> val list = listOf(1,2,3)
+>>> list.map { i -> i * 2 }
+[2, 4, 6]
+```
+
+If a lambda only has one parameter, its declaration along with `->` can be omitted:
+```
+>>> list.map { `it` * 2 }
+[2, 4, 6]
+```
+
+---
+
+# Kotlin for DLSs
+
+Lambdas can be specified outside of the parantheses if they are a function's last parameter:
+```
+map.getOrElse("key", { "defaultValue" })
+map.getOrElse("key") { "defaultValue" }
+```
+
+Parentheses can be omitted entirely if the lambda is the only argument to that call:
+
+```
+val people = listOf(Person("Alice", 17), Person("Bob", 42))
+people.maxBy({ it.age ?: 0 })
+people.maxBy() { it.age ?: 0 }
+people.maxBy { it.age ?: 0 }
+```
+
+---
+
+# Kotlin for DSLs: Examples
+
+Example from Anko Layouts (https://github.com/Kotlin/anko/wiki/Anko-Layouts):
+```
+verticalLayout {
+    val name = editText()
+    button("Say Hello") {
+        onClick { toast("Hello, ${name.text}!") }
+    }
+}
+```
+
+Mockito-Kotlin (https://github.com/nhaarman/mockito-kotlin):
+```
+val mock = mock<MyClass> {
+    on { text() } doReturn "mocked"
+}
+```
+
+---
+
+template: divider
+
 # Collections
 
 ---
@@ -966,76 +949,6 @@ true
 
 ---
 
-template: divider
-
-# Higher Order Functions
-
----
-
-# Higher Order Functions
-
-a function that takes functions as parameters, or returns a function
-
-```
-fun apply(operation: (Int, Int) -> Int, first: Int, second: Int): Int {
-    return operation(first, second)
-}
-
-fun mult(): (Int, Int) -> Int = { x, y -> x + y }
-```
-
-```
->>> apply({ x, y -> x + y }, 2, 3)
-5
->>> apply(mult(), 2, 3)
-6
-```
----
-
-# Single Parameter: it
-
-```
->>> val list = listOf(1,2,3)
->>> list.map { i -> i * 2 }
-[2, 4, 6]
-```
-
-If a lambda only has one parameter, its declaration along with `->` can be omitted:
-```
->>> list.map { `it` * 2 }
-[2, 4, 6]
-```
-
----
-
-# Kotlin for DLSs
-
-Parentheses in a call can be omitted entirely if the lambda is the only argument to that call.
-
-```
->>> val people = listOf(Person("Alice", 17), Person("Bob", 42))
->>> people.maxBy({ it.age ?: 0 })
-Person(name=Bob, age=42)
->>> people.maxBy { it.age ?: 0 }
-Person(name=Bob, age=42)
-```
-
-Example from Anko Layouts¹:
-```
-verticalLayout {
-    val name = editText()
-    button("Say Hello") {
-        onClick { toast("Hello, ${name.text}!") }
-    }
-}
-```
-
-<div class="footnote">
-<hr>
-<span class="footnote">¹ https://github.com/Kotlin/anko/wiki/Anko-Layouts</i></span>
-</div>
-
----
 
 template: divider
 
@@ -1286,7 +1199,7 @@ template: divider
 
 ---
 
-# Things I skipped
+# There's a lot more...
 
 - Operator overloading
 
@@ -1304,6 +1217,36 @@ template: divider
 
 - Annotations
 
+<br>
+⇒ https://kotlinlang.org/docs/reference/
+
+---
+
+# Where to start? ¹
+
+1. Tests
+
+ - very cheap and effective way to learn new language
+
+ - safe: not deployed as production code
+<br>
+2. Migration of existing code
+
+ - (D)TOs and models usually have low impact
+
+ - migrate utility classes
+
+ - no need to migrate entire codebase, Java and Kotlin work nearly seamlessly together
+
+3. Go wild
+
+ - write all of your new code in Kotlin
+
+
+<div class="footnote">
+<hr>
+<span class="footnote">¹ Adapted from https://medium.com/@enriquelopezmanas/</i></span>
+</div>
 ---
 
 # Learning Resources
@@ -1312,13 +1255,31 @@ template: divider
 
 - Kotlin Koans: https://try.kotlinlang.org/
 
-- <img align="top" src="images/kotlin-in-action.jpg" height="160"><br>*Kotlin in Action* by Dmitry Jemerov and Svetlana Isakova
+- <img align="top" src="images/kotlin-in-action.jpg" height="140"><br>*Kotlin in Action* by Dmitry Jemerov and Svetlana Isakova
 
 - Java Top Blogs: https://www.topjavablogs.com/
 
 - Exercism: http://exercism.io/languages/kotlin/exercises
 
 - Handy Resources to Learn Kotlin Easily: http://blog.rahulchowdhury.co/handy-resources-to-learn-kotlin-easily/
+
+- Kotlin Weekly Newsletter: http://www.kotlinweekly.net/
+
+---
+
+<div style="text-align: center">
+<img align="top" src="images/kug.png" height="160">
+</div>
+
+First meetup was on June 22th.
+
+Meetups are planned to be every 2-3 months.
+
+<br>
+
+- meetup: https://www.meetup.com/Kotlin-Karlsruhe-User-Group/
+
+- Twitter: https://twitter.com/kug_ka
 
 ---
 
@@ -1335,6 +1296,155 @@ template: divider
 
 ### Questions?
 
+---
+
+template: divider
+
+# Addendum
+
+---
+
+template: divider
+# Environment Setup
+
+---
+
+# Building with Maven
+
+```xml
+<properties>
+ <kotlin.version>1.1.3</kotlin.version>
+</properties>
+```
+
+```xml
+<dependencies>
+  <dependency>
+    <groupId>org.jetbrains.kotlin</groupId>
+     <artifactId>kotlin-stdlib</artifactId>
+     <version>${kotlin.version}</version>
+  </dependency>
+</dependencies>
+```
+
+```xml
+<build>
+    <sourceDirectory>src/main/kotlin</sourceDirectory>
+    <testSourceDirectory>src/test/kotlin</testSourceDirectory>
+    ...
+```
+
+---
+
+# Building with Maven (cont'd)
+
+```xml
+    <plugins>
+        <plugin>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-maven-plugin</artifactId>
+            <version>${kotlin.version}</version>
+            <executions>
+                <execution>
+                    <id>compile</id>
+                    <phase>compile</phase>
+                    <goals><goal>compile</goal></goals>
+                </execution>
+                <execution>
+                    <id>test-compile</id>
+                    <phase>test-compile</phase>
+                    <goals><goal>test-compile</goal></goals>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+```
+*Source: https://kotlinlang.org/docs/reference/using-maven.html*
+---
+
+# Building with Gradle
+
+```xml
+buildscript {
+    ext.kotlin_version = '1.1.3'
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+```
+
+```groovy
+apply plugin: 'kotlin'
+```
+
+```groovy
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib"
+}
+```
+
+---
+
+# Building with Gradle (cont'd)
+
+** Targeting Java 8:**
+```groovy
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+```
+
+*Source: https://kotlinlang.org/docs/reference/using-gradle.html*
+---
+
+# IntelliJ IDEA
+
+* Install Kotlin plugin:<br>Preferences → Plugins → Browse repositories... → "Kotlin" → Install
+
+* New Project → Java/Gradle/Maven → Kotlin → ...
+
+<br>
+<div style="text-align: center">
+<img src="images/mission-accomplished.gif" height="150"><br>
+</div>
+
+---
+
+# Command Line Compiler
+
+- Install
+
+ - Download from https://github.com/JetBrains/kotlin/releases
+
+ - macOS: `brew install kotlin`
+
+- Compile:
+ ```
+ kotlinc hello.kt [-include-runtime] -d hello.jar
+ ```
+
+- REPL:
+```
+kotlinc-jvm
+```
+
+---
 
 <!-- CONTEND END -->
 </textarea>
