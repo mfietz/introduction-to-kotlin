@@ -801,9 +801,7 @@ StringExtensionsKt.isPalindrom("otto");
 
 template: divider
 
-template: divider
-
-# Higher Order Functions
+# Higher Order Functions & Lambdas
 
 ---
 
@@ -827,6 +825,20 @@ fun mult(): (Int, Int) -> Int = { x, y -> x + y }
 ```
 ---
 
+# Lambda
+
+is a "function literal": function that is not declared, but immediately passed as an expression
+- always surrounded by `{ ... }`
+
+```
+val people = listOf(Person("Alice", 23), Person("Bob", 42))
+people.maxBy( { person -> person.age } )
+```
+
+
+
+---
+
 # Single Parameter: it
 
 ```
@@ -845,13 +857,24 @@ If a lambda only has one parameter, its declaration along with `->` can be omitt
 
 # Kotlin for DLSs
 
-Parentheses in a call can be omitted entirely if the lambda is the only argument to that call.
+Lambdas can be specified outside of the parantheses if they are a function's last parameter:
+```
+map.getOrElse("key", { "defaultValue" })
+map.getOrElse("key") { "defaultValue" }
+```
+
+Parentheses can be omitted entirely if the lambda is the only argument to that call:
 
 ```
->>> val people = listOf(Person("Alice", 17), Person("Bob", 42))
->>> people.maxBy({ it.age ?: 0 })
-Person(name=Bob, age=42)
+val people = listOf(Person("Alice", 17), Person("Bob", 42))
+people.maxBy({ it.age ?: 0 })
+people.maxBy() { it.age ?: 0 }
+people.maxBy { it.age ?: 0 }
 ```
+
+---
+
+# Kotlin for DSLs: Examples
 
 Example from Anko Layouts (https://github.com/Kotlin/anko/wiki/Anko-Layouts):
 ```
