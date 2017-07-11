@@ -801,53 +801,6 @@ StringExtensionsKt.isPalindrom("otto");
 
 template: divider
 
-# Collections
-
----
-
-# Immutable collections
-
-Kotlin distinguishes between **mutable** and **immutable collections**
-
-```
->>> val immutableList = listOf(1, 2, 3)
->>> immutableList.add(4)
-error: unresolved reference: add
-immutableList.add(4)
-              ^
-```
-
-```
->>> val mutableList = mutableListOf(1, 2, 3)
->>> mutableList.add(4)
-true
-```
-
-Mutable collections can have read only views:
-```
->>> val readOnlyView: List<Int> = mutableListOf(1, 2, 3)
->>> readOnlyView.add(4)
-error: unresolved reference: add
-readOnlyView.add(4)
-             ^
->>> (readOnlyView as ArrayList<Int>).add(4)
-true
-```
-
----
-
-# Accessing maps
-
-```
->>> val map = mapOf("foo" to 1, "bar" to 2)
->>> map.get("foo")
-1
->>> map["foo"]
-1
-```
-
----
-
 template: divider
 
 # Higher Order Functions
@@ -918,6 +871,56 @@ val mock = mock<MyClass> {
 ```
 
 ---
+
+template: divider
+
+# Collections
+
+---
+
+# Immutable collections
+
+Kotlin distinguishes between **mutable** and **immutable collections**
+
+```
+>>> val immutableList = listOf(1, 2, 3)
+>>> immutableList.add(4)
+error: unresolved reference: add
+immutableList.add(4)
+              ^
+```
+
+```
+>>> val mutableList = mutableListOf(1, 2, 3)
+>>> mutableList.add(4)
+true
+```
+
+Mutable collections can have read only views:
+```
+>>> val readOnlyView: List<Int> = mutableListOf(1, 2, 3)
+>>> readOnlyView.add(4)
+error: unresolved reference: add
+readOnlyView.add(4)
+             ^
+>>> (readOnlyView as ArrayList<Int>).add(4)
+true
+```
+
+---
+
+# Accessing maps
+
+```
+>>> val map = mapOf("foo" to 1, "bar" to 2)
+>>> map.get("foo")
+1
+>>> map["foo"]
+1
+```
+
+---
+
 
 template: divider
 
