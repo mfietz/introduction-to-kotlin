@@ -1,6 +1,5 @@
 fun main(args: Array<String>) {
     apply(mult(), 2, 3)
-
 }
 
 fun apply(operation: (Int, Int) -> Int, first: Int, second: Int): Int {
