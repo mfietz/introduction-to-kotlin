@@ -819,7 +819,7 @@ fun apply(operation: `(Int, Int)`​` -> Int`, first: Int, second: Int): Int {
     return operation(first, second)
 }
 
-fun mult(): (Int, Int) -> Int = { x, y -> x + y }
+fun mult(): `(Int, Int) -> Int` = { x, y -> x + y }
 ```
 
 ```
@@ -834,6 +834,8 @@ fun mult(): (Int, Int) -> Int = { x, y -> x + y }
 
 is a "function literal": function that is not declared, but immediately passed as an expression
 - always surrounded by `{ ... }`
+- parameters (if any) before `->` (parameter types optional)
+- body after `->`
 
 ```
 val people = listOf(Person("Alice", 23), Person("Bob", 42))
@@ -1304,7 +1306,7 @@ template: divider
 
 ---
 
-template: divider
+template: sub-divider
 # Environment Setup
 
 ---
@@ -1443,8 +1445,6 @@ compileTestKotlin {
 ```
 kotlinc-jvm
 ```
-
----
 
 <!-- CONTEND END -->
 </textarea>

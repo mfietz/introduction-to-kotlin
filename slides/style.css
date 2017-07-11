@@ -55,6 +55,18 @@ div.footnote {
   color: white;
 }
 
+.sub-divider {
+  background-color: #70AD47;
+  vertical-align: middle;
+}
+.sub-divider .remark-slide-number {
+   color: white;
+}
+.sub-divider h1, h2, h3 {
+  text-align: center;
+  color: white;
+}
+
 .remark-code, .remark-inline-code {
   font-family: 'Ubuntu Mono';
 }
